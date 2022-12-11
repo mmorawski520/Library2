@@ -5,15 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library2"
         mc:Ignorable="d"
-        Title="AuthorWindow" Height="350" Width="400">
-    <Grid>
-        <StackPanel Margin="50 90 50 30">
-            <Label Content="Name" ></Label>
-            <TextBox x:Name="txtBoxName"></TextBox>
-            <Label Content="Surname" ></Label>
-            <TextBox x:Name="txtBoxSurname"></TextBox>
-            <Button x:Name="btnAddAuthor" Margin="30 15 30 15 " Content="Add author" Width="90" Click="btnAddAuthor_Click"></Button>
-            <Button x:Name="btnBack" Content="Back" Width="90" Click="btnBack_Click"></Button>
-        </StackPanel>
+        Title="AuthorWindow"  Height="450" Width="800">
+    <Grid Margin="10,10,10,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="313*"/>
+            <RowDefinition Height="37*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.RowSpan="2">
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,-15">
+                <StackPanel DockPanel.Dock="Right" Margin="10" MinWidth="200">
+                    <Label>name</Label>
+                    <TextBox x:Name="txtBoxName"></TextBox>
+                    <Label>surname</Label>
+                    <TextBox x:Name="txtBoxSurname"></TextBox>
+                    <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                        <Button Margin="10" x:Name="btnSave" Click="btnSave_Click">save</Button>
+                        <Button Margin="10"  x:Name="btnExit" Click="btnExit_Click">exit</Button>
+                    </StackPanel>
+                </StackPanel>
+                <ListView x:Name="listView" Margin="10" SelectionChanged="listView_SelectionChanged"  >
+                    <ListView.Resources>
+                        <ContextMenu x:Key="ItemContextMenu">
+                            <MenuItem Header="Edit"  Background="WhiteSmoke" Click="MenuItem_Click_1"  />
+                            <MenuItem Header="Delete" Background="WhiteSmoke" Click="MenuItem_Click"  />
+                        </ContextMenu>
+                    </ListView.Resources>
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}" >
+                            <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="id" Width="80" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding id}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="name" Width="80" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding fullname}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </Window>

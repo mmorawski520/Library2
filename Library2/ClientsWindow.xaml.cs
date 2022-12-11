@@ -70,10 +70,7 @@ namespace Library2
                     catch(Exception eer) { }
                 }
           
-               
-
-                add = true;
-               
+                add = true;     
                 this.initUser();
             }
         }
@@ -82,8 +79,7 @@ namespace Library2
         {
             dynamic selectedItem = listView.SelectedItem;
             dbHelper.removeUser(Convert.ToString(selectedItem["id"]));
-            initUser();
-         
+            initUser(); 
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)

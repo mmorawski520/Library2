@@ -19,19 +19,92 @@ namespace Library2
     /// </summary>
     public partial class CategoryWindow : Window
     {
-        DbHelper dbHelper= new DbHelper();
+        DbHelper dbHelper = new DbHelper();
+        int index;
+        bool isEdited = false;
         public CategoryWindow()
         {
             InitializeComponent();
+            initCategories();
+        }
+        private bool displayError()
+        {
+            if (txtBoxName.Text == "" )
+                return true;
+            return false;
         }
 
         private void btnAddAuthor_Click(object sender, RoutedEventArgs e)
         {
-            dbHelper.addCategory(txtBoxName.Text);
-            txtBoxName.Text = "";
+
+        }
+
+        private void initCategories()
+        {
+            listView.ItemsSource = dbHelper.getCategory();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (!displayError())
+            {
+
+                if (!isEdited)
+                    dbHelper.addCategory(txtBoxName.Text);
+                else
+                {
+                    dynamic selectedItem = listView.Items[index];
+                    dbHelper.updateCategory(Convert.ToString(selectedItem["id"]), txtBoxName.Text);
+                   
+                }
+                txtBoxName.Text = "";
+               
+                isEdited = false;
+
+                initCategories();
+            }
+            else
+            {
+                MessageBox.Show("Invalid data");
+            }
+
+        }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            index = (int)listView.SelectedIndex;
+
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            dynamic selectedItem = listView.SelectedItem;
+            var name = selectedItem["name"].ToString();
+            
+            txtBoxName.Text = name;
+           
+
+            isEdited = true;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic selectedItem = listView.SelectedItem;
+            dbHelper.deleteCategory(Convert.ToString(selectedItem["id"]));
+            initCategories();
+
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
             MainWindow mainWindow = new MainWindow();

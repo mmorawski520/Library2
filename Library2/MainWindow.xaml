@@ -15,8 +15,8 @@
                 <Button x:Name="Rent" Content="Rent a book" Width="224" Click="Rent_Click"/>
             </DockPanel>
             <DockPanel  HorizontalAlignment="Center" Height="100" LastChildFill="False">
-                <Button x:Name="Categories" Content="Books" Width="224" Click="Categories_Click" />
-                <Button x:Name="Authors" Content="Clients" Width="224" Click="Authors_Click" />
+                <Button x:Name="Categories" Content="Categories" Width="224" Click="Categories_Click" />
+                <Button x:Name="Authors" Content="Authors" Width="224" Click="Authors_Click" />
                 
             </DockPanel>
 

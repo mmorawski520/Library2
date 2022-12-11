@@ -1,11 +1,11 @@
-﻿<Window x:Class="Library2.BookWindow"
+﻿<Window x:Class="Library2.RentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library2"
         mc:Ignorable="d"
-        Title="BookWindow" Height="450" Width="800">
+        Title="RentWindow" Height="450" Width="800">
     <Grid>
         <Grid Margin="10,10,10,20">
             <Grid.RowDefinitions>
@@ -15,15 +15,15 @@
             <DockPanel Grid.RowSpan="2">
                 <DockPanel DockPanel.Dock="Top" Margin="0,0,0,-15">
                     <StackPanel DockPanel.Dock="Right" Margin="10" MinWidth="200">
-                        <Label>title</Label>
-                        <TextBox x:Name="txtBoxTitle"></TextBox>
-                        <Label>description</Label>
-                        <TextBox x:Name="txtBoxDesc" Height="62"></TextBox>
-                        <Label>Author</Label>
-                        <ComboBox x:Name="cmbBoxAuthor"  InputScope="Default"></ComboBox>
-                        <Label>Categories</Label>
-                        <ComboBox x:Name="cmbBoxCategory"></ComboBox>
-                        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                        <Label Content="Book"></Label>
+                        <ComboBox x:Name="cmbBoxBook"></ComboBox>
+                        <Label Content="User"></Label>
+                        <ComboBox x:Name="cmbBoxUser"></ComboBox>
+                        <Label Content="Should be returned until"></Label>
+                        <DatePicker x:Name="datepicker"></DatePicker>
+                        <Label Content="Is returned?"></Label>
+                        <CheckBox x:Name="isReturned"></CheckBox>
+                            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
                             <Button Margin="10" x:Name="btnSave" Click="btnSave_Click">save</Button>
                             <Button Margin="10"  x:Name="btnExit" Click="btnExit_Click">exit</Button>
                         </StackPanel>
@@ -31,7 +31,7 @@
                     <ListView x:Name="listView" Margin="10" SelectionChanged="listView_SelectionChanged"  >
                         <ListView.Resources>
                             <ContextMenu x:Key="ItemContextMenu">
-                                <MenuItem Header="Edit"  Background="WhiteSmoke" Click="MenuItem_Click_1"  />
+                                <MenuItem Header="Edit"  Background="WhiteSmoke" Click="MenuItem_Click1"  />
                                 <MenuItem Header="Delete" Background="WhiteSmoke" Click="MenuItem_Click"  />
                             </ContextMenu>
                         </ListView.Resources>
@@ -43,7 +43,7 @@
                         </ListView.ItemContainerStyle>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="id" Width="80" >
+                                <GridViewColumn Header="id" Width="40" >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding id}" />
@@ -51,34 +51,42 @@
                                     </GridViewColumn.CellTemplate>
 
                                 </GridViewColumn>
-                                <GridViewColumn Header="name" Width="80" >
+                                <GridViewColumn Header="book name" Width="80" >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding name}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                    
-                                </GridViewColumn>
-                                <GridViewColumn Header="desc" Width="80" >
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding description}" />
+                                            <TextBlock Text="{Binding book_name}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
 
                                 </GridViewColumn>
-                                <GridViewColumn Header="category" Width="80" >
+                                <GridViewColumn Header="rented by" Width="80" >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding category}" />
+                                            <TextBlock Text="{Binding rented_by}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
 
                                 </GridViewColumn>
-                                <GridViewColumn Header="author" Width="80" >
+                                <GridViewColumn Header="rented at" Width="80" >
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding author}" />
+                                            <TextBlock Text="{Binding rented_at, StringFormat={}{0:yy.MM.dd}}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+
+                                </GridViewColumn>
+                                <GridViewColumn Header="should be returned until" Width="150" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding rented_to, StringFormat={}{0:yy.MM.dd}}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+
+                                </GridViewColumn>
+                                <GridViewColumn Header="returned" Width="80" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding is_returned}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
 

@@ -43,7 +43,10 @@ namespace Library2
 
         private void Rent_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            RentWindow rentWindow = new RentWindow();
+            rentWindow.Show();
+            this.Close();
         }
 
         private void Categories_Click(object sender, RoutedEventArgs e)
